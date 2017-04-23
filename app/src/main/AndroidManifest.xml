@@ -24,6 +24,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4d3ccc51466fff3c83f8f1f5fc1554d76de4b980" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
