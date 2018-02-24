@@ -32,6 +32,8 @@ jobs:
           command: |
             ./cc-test-reporter before-build
             ./gradlew lint test
+            ./gradlew jacocoTestDebugUnitTestReport
+            ./gradlew jacocoFix
             ./cc-test-reporter after-build --coverage-input-type jacoco --exit-code $?
       - store_artifacts:
           path: app/build/reports
