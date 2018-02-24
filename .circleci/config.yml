@@ -8,6 +8,8 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
+      # use the CircleCI-provided Android image with the api-25-alpha tag
+      - image: circleci/android:api-25-alpha
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -40,3 +42,9 @@ jobs:
 
       # run tests!
       - run: gradle test
+
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
