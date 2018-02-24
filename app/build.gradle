@@ -36,5 +36,5 @@ task jacocoFix(type: Copy) {
     rename { String fileName ->
         fileName.replace("jacocoTestDebugUnitTestReport.xml", "jacoco.xml")
     }
-    filter { line -> line.replaceAll("com/", "myfirstapp/src/main/java/com/") }
+    filter { line -> line.replaceAll("com/", "app/src/main/java/com/") }
 }
