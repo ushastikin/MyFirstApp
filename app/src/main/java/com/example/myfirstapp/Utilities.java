@@ -5,7 +5,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Utilities {
+class Utilities {
+
+    // The utility classes shouldn't be initialized
+    private Utilities() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * @param timestamp the date in milliseconds
@@ -14,11 +19,13 @@ public class Utilities {
      * provided locale and time zone
      * For example, Feb 24, 2018 11:20 AM is case of Locale.US
      */
-    public static String getDateTimeLabelFromLong(long timestamp, Locale locale, TimeZone timeZone) {
-        Date date_timestamp = new Date(timestamp);
+    static String getDateTimeLabelFromLong(long timestamp,
+                                           Locale locale,
+                                           TimeZone timeZone) {
+        Date dateTimestamp = new Date(timestamp);
         DateFormat dateFormat =
                 DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, locale);
         dateFormat.setTimeZone(timeZone);
-        return String.format("%s", dateFormat.format(date_timestamp));
+        return String.format("%s", dateFormat.format(dateTimestamp));
     }
 }
