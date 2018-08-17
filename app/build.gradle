@@ -10,6 +10,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'jacoco-android'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -46,4 +47,13 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true
     }
+}
+
+task jacocoFix(type: Copy) {
+    from 'build/reports/jacoco/jacocoTestDebugUnitTestReport/jacocoTestDebugUnitTestReport.xml'
+    into '../'
+    rename { String fileName ->
+        fileName.replace("jacocoTestDebugUnitTestReport.xml", "jacoco.xml")
+    }
+    filter { line -> line.replaceAll("com/", "app/src/main/java/com/") }
 }

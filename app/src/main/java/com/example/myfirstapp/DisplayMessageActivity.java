@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
@@ -19,5 +23,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(message);
+
+        Toast.makeText(this,
+                Utilities.getDateTimeLabelFromLong(System.currentTimeMillis() % 1000,
+                        Locale.getDefault(), TimeZone.getDefault()),
+                Toast.LENGTH_SHORT).show();
     }
 }
