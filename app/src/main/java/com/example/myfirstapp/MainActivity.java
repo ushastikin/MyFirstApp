@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+    /** Called when the user taps the Send button */
+    public void sendSentry(View view) {
         new MyClass().logWithStaticAPI();
     }
 
