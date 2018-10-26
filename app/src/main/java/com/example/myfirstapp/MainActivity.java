@@ -1,6 +1,7 @@
 package com.example.myfirstapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,8 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -20,7 +25,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Fabric.with(this, new Crashlytics());
+
+        Context ctx = this.getApplicationContext();
+
+        // Use the Sentry DSN (client key) from the Project Settings page on Sentry
+        String sentryDsn = "https://7ad5e6bc05814fd1b4949c7f0be94e27@sentry.io/1310065";
+        Sentry.init(sentryDsn, new AndroidSentryClientFactory(ctx));
+
         setContentView(R.layout.activity_main);
     }
 
@@ -66,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+        new MyClass().logWithStaticAPI();
     }
 
     @Override
